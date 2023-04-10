@@ -1,0 +1,16 @@
+- [ ] Login page is landing page
+- [ ] User can login (Space Station Admin)
+- [ ] After logging in, Space Station Admins see a page with options:
+  - [ ] CRUD on _missions_
+    - [ ] Create new mission
+    - [ ] Delete existing mission
+    - [ ] View mission details
+        - [ ] Update mission details
+        - [ ] 'Assign' report to Ground Control Admin 
+- [ ] After logging in, Ground Control Admins see a page with options:
+  - [ ] Read Only on _mission reports_
+    - [ ] Create new mission
+    - [ ] Delete existing mission
+    - [ ] View mission details
+        - [ ] Update mission details
+        - [ ] 'Assign' report to Ground Control Admin 
