@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block main %}
+  <div class="mt-4">
+    <img src="/static/nasa-logo.png" alt="" width="256" height="128" />
+  </div>
+
+  <h1>{{ mission.name }}</h1>
+
+  <a href="/" class="btn btn-primary">Back</a>
+{% endblock %}

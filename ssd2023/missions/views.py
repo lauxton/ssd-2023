@@ -1,5 +1,4 @@
 import csv
-import datetime
 import logging
 
 from django.contrib.auth import authenticate, login, logout
@@ -7,23 +6,18 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 
-from .models import MissionReport
+from .models import Mission
 
 logger = logging.getLogger("ssd2023")
 
 
 def index(request):
-    now = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-    reports = MissionReport.objects.all()
-
     if not request.user.is_authenticated:
         return HttpResponseRedirect("/login")
 
-    # TODO: check if the user is logged in,
-    # if they're not redirect to login page,
-    # if they are show the index page
+    missions = Mission.objects.all()
 
-    return render(request, 'index.html', {'now': now, 'reports': reports})
+    return render(request, 'index.html', {'missions': missions})
 
 
 def login_endpoint(request):
@@ -50,19 +44,7 @@ def logout_endpoint(request):
     return render(request, 'logout.html')
 
 
-def create_report(request):
-    return HttpResponse("Creating a new report")
+def mission_details(request, mission_id):
+    mission = Mission.objects.get(pk=mission_id)
 
-
-def export_report(request, report_id):
-    report = MissionReport.objects.get(pk=report_id)
-
-    response = HttpResponse(
-        content_type='text/csv',
-        headers={'Content-Disposition': 'attachment; filename="report.csv"'},
-    )
-
-    writer = csv.writer(response)
-    writer.writerow([report.mission.name, report.title])
-
-    return response
+    return render(request, 'mission.html', {'mission': mission})

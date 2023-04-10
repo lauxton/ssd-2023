@@ -10,9 +10,6 @@ class SecureCharField(models.CharField):
 
     description = "A one-way encrypted secure character field. It cannot be decrypted, only verified"
 
-    # TODO: Implement encryption
-    # TODO: Implement one-way verification
-
     def __init__(self, *args, **kwargs):
         kwargs['max_length'] = 104
         super().__init__(*args, **kwargs)
@@ -69,11 +66,11 @@ class Mission(models.Model):
     """A mission that the organisation is working on."""
 
     name = models.CharField(max_length=DEFAULT_NAME_LENGTH)
-    description = models.CharField(max_length=4096)
+    description = models.CharField(blank=True, null=True, max_length=4096)
     division = models.ForeignKey(Division, null=True, on_delete=models.SET_NULL)
     supervisor = models.ForeignKey(Employee, on_delete=models.CASCADE)
-    start_date = models.DateTimeField("Date of commencement")
-    end_date = models.DateTimeField("Date of completion")
+    start_date = models.DateTimeField("Date of commencement", blank=True, null=True)
+    end_date = models.DateTimeField("Date of completion", blank=True, null=True)
     security_clearance = models.IntegerField(choices=SecurityClearance.choices)
 
     def __str__(self):
