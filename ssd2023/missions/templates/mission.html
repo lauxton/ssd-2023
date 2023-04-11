@@ -8,6 +8,21 @@
 
   <h1>{{ mission.name }}</h1>
   <p class="lead">{{ mission.description }}</p>
+  <p class="lead">
+    <b>Division:</b> {{ mission.division }}
+  </p>
+  <p class="lead">
+    <b>Supervisor:</b> {{ mission.supervisor }}
+  </p>
+  <p class="lead">
+    <b>Date of commencement:</b> {{ mission.start_date }}
+  </p>
+  <p class="lead">
+    <b>Date of completion:</b> {{ mission.end_date }}
+  </p>
+  <p class="lead">
+    <b>Security clearance required:</b> {{ mission.security_clearance }}
+  </p>
 
   <a href="/" class="btn btn-primary">Back</a>
 {% endblock %}
