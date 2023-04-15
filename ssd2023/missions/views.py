@@ -25,7 +25,7 @@ def login_endpoint(request):
         username = request.POST.get('username', '')
         password = request.POST.get('password', '')
 
-        logger.info(f"User {username} is attempting to log in with password {password}")
+        logger.info(f"User {username} is attempting to log in")
 
         user = authenticate(request, username=username, password=password)
 
