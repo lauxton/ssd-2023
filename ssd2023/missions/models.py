@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.exceptions import ValidationError
 from django.contrib.auth.models import User
 
 DEFAULT_NAME_LENGTH = 1024
@@ -76,6 +77,11 @@ class Mission(models.Model):
     def __str__(self):
         return self.name
 
+    def clean(self):
+        if self.start_date and self.end_date:
+            if self.end_date < self.start_date:
+                raise ValidationError("End date-time must be later than start date-time.")
+
 
 class MissionReport(models.Model):
     """A report on a mission."""
@@ -99,7 +105,12 @@ class Project(models.Model):
     location = models.CharField(max_length=100)
     start_date = models.DateTimeField("Date of commencement")
     end_date = models.DateTimeField("Date of completion")
-    description = models.CharField(max_length=4096)
+    description = models.CharField(max_length=4096, blank=True, null=True)
 
     def __str__(self):
         return self.name
+
+    def clean(self):
+        if self.start_date and self.end_date:
+            if self.end_date < self.start_date:
+                raise ValidationError("End date-time must be later than start date-time.")
