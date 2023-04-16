@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block main %}
+  <div class="mt-4">
+    <img src="/static/nasa-logo.png" alt="" width="256" height="128" />
+  </div>
+
+  <form action="/mission/create" method="POST">
+    {% csrf_token %}
+    <h1 class="h3 mb-3 font-weight-normal">{{ mission.name }}</h1>
+
+    {% for field in form %}
+      <div class="form-group">{{ field.label_tag }}
+        {{ field }}</div>
+    {% endfor %}
+
+    <a href="/" class="btn btn-secondary">Back</a>
+    <button class="btn btn-primary" type="submit">Create</button>
+  </form>
+{% endblock %}

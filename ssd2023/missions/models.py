@@ -1,6 +1,7 @@
 from django.db import models
 from django.core.exceptions import ValidationError
 from django.contrib.auth.models import User
+from django_cryptography.fields import encrypt
 
 DEFAULT_NAME_LENGTH = 1024
 DEFAULT_DESCRIPTION_LENGTH = 4096
@@ -56,11 +57,14 @@ class Employee(models.Model):
     division = models.ForeignKey(Division, null=True, on_delete=models.SET_NULL)
     address = models.CharField(blank=True, max_length=100)
     phone_number = models.CharField(blank=True, max_length=14)
-    social_security_number = SecureCharField(blank=True, max_length=9)  # TODO: add fixed length
+    social_security_number = encrypt(SecureCharField(blank=True, max_length=9))
     security_clearance = models.IntegerField(choices=SecurityClearance.choices)
 
     def __str__(self):
-        return self.user.first_name + " " + self.user.last_name
+        if self.user.first_name and self.user.last_name:
+            return self.user.first_name + " " + self.user.last_name
+
+        return self.user.username
 
 
 class Mission(models.Model):
@@ -93,7 +97,7 @@ class MissionReport(models.Model):
     summary = models.CharField(max_length=DEFAULT_DESCRIPTION_LENGTH)
 
     def __str__(self):
-        return self.mission.name + ": " + self.title
+        return self.title
 
 
 class Project(models.Model):
