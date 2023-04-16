@@ -8,6 +8,14 @@
     <p class="lead">This is a prototype for the implementation of the ISS and NASA portal.</p>
   </div>
 
+  {% if user %}
+    {% if user.first_name %}
+      <p>Hi, {{ user.first_name }}!</p>
+    {% else %}
+      <p>Hi, {{ user.username }}!</p>
+    {% endif %}
+  {% endif %}
+
   {% if missions %}
     <h4>Mission List</h4>
 
@@ -36,5 +44,5 @@
     <a href="/mission/create" class="btn btn-primary">Create Mission</a>
   {% endif %}
 
-  <a href="/logout" class="btn btn-primary">Logout</a>
+  <a href="/logout" class="btn btn-danger">Logout</a>
 {% endblock %}
