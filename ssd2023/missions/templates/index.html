@@ -8,13 +8,33 @@
     <p class="lead">This is a prototype for the implementation of the ISS and NASA portal.</p>
   </div>
 
-  <ul>
-    {% for mission in missions %}
-      <li>
-        <a href="/mission/{{ mission.pk }}">{{ mission.name }}</a>
-      </li>
-    {% endfor %}
-  </ul>
+  {% if missions %}
+    <h4>Mission List</h4>
+
+    <ul>
+      {% for mission in missions %}
+        <li>
+          <a href="/mission/{{ mission.pk }}">{{ mission.name }}</a>
+        </li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+
+  {% if mission_reports %}
+    <h4>Mission Report List</h4>
+
+    <ul>
+      {% for mission_report in mission_reports %}
+        <li>
+          <a href="/mission-report/{{ mission_report.pk }}">{{ mission_report.title }}</a>
+        </li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+
+  {% if can_add_mission %}
+    <a href="/mission/create" class="btn btn-primary">Create Mission</a>
+  {% endif %}
 
   <a href="/logout" class="btn btn-primary">Logout</a>
 {% endblock %}

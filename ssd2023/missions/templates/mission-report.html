@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block main %}
+  <div class="mt-4">
+    <img src="/static/nasa-logo.png" alt="" width="256" height="128" />
+  </div>
+
+  <h1>Mission Report: {{ mission_report.title }}</h1>
+  <p class="lead">
+    <b>Mission:</b> {{ mission_report.mission }}
+  </p>
+  <p class="lead">
+    <b>Assign to:</b> {{ mission_report.assigned_to }}
+  </p>
+  <p class="lead">
+    <b>Publish date:</b> {{ mission_report.publish_date }}
+  </p>
+  <p class="lead">
+    <b>Summary:</b> {{ mission_report.summary }}
+  </p>
+
+  <a href="/" class="btn btn-secondary">Back</a>
+{% endblock %}
