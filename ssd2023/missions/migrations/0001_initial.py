@@ -18,57 +18,72 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Division',
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.BigAutoField(auto_created=True,
+                 primary_key=True, serialize=False, verbose_name='ID')),
                 ('name', models.CharField(max_length=1024)),
             ],
         ),
         migrations.CreateModel(
             name='Employee',
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.BigAutoField(auto_created=True,
+                 primary_key=True, serialize=False, verbose_name='ID')),
                 ('address', models.CharField(blank=True, max_length=100)),
                 ('phone_number', models.CharField(blank=True, max_length=14)),
-                ('social_security_number', missions.models.SecureCharField(blank=True, max_length=104)),
-                ('security_clearance', models.IntegerField(choices=[(1, 'Baseline'), (2, 'Confidential'), (3, 'Secret'), (4, 'Top Secret')])),
-                ('division', models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to='missions.division')),
-                ('user', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                ('social_security_number', models.CharField(blank=True, max_length=104)),
+                ('security_clearance', models.IntegerField(choices=[
+                 (1, 'Baseline'), (2, 'Confidential'), (3, 'Secret'), (4, 'Top Secret')])),
+                ('division', models.ForeignKey(null=True,
+                 on_delete=django.db.models.deletion.SET_NULL, to='missions.division')),
+                ('user', models.OneToOneField(
+                    on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
             ],
         ),
         migrations.CreateModel(
             name='Mission',
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.BigAutoField(auto_created=True,
+                 primary_key=True, serialize=False, verbose_name='ID')),
                 ('name', models.CharField(max_length=1024)),
                 ('description', models.CharField(max_length=4096)),
                 ('start_date', models.DateTimeField(verbose_name='Date of commencement')),
                 ('end_date', models.DateTimeField(verbose_name='Date of completion')),
-                ('security_clearance', models.IntegerField(choices=[(1, 'Baseline'), (2, 'Confidential'), (3, 'Secret'), (4, 'Top Secret')])),
-                ('division', models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to='missions.division')),
-                ('supervisor', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='missions.employee')),
+                ('security_clearance', models.IntegerField(choices=[
+                 (1, 'Baseline'), (2, 'Confidential'), (3, 'Secret'), (4, 'Top Secret')])),
+                ('division', models.ForeignKey(null=True,
+                 on_delete=django.db.models.deletion.SET_NULL, to='missions.division')),
+                ('supervisor', models.ForeignKey(
+                    on_delete=django.db.models.deletion.CASCADE, to='missions.employee')),
             ],
         ),
         migrations.CreateModel(
             name='Project',
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.BigAutoField(auto_created=True,
+                 primary_key=True, serialize=False, verbose_name='ID')),
                 ('name', models.CharField(max_length=1024)),
                 ('location', models.CharField(max_length=100)),
                 ('start_date', models.DateTimeField(verbose_name='Date of commencement')),
                 ('end_date', models.DateTimeField(verbose_name='Date of completion')),
                 ('description', models.CharField(max_length=4096)),
-                ('manager', models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to='missions.employee')),
-                ('mission', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='missions.mission')),
+                ('manager', models.ForeignKey(null=True,
+                 on_delete=django.db.models.deletion.SET_NULL, to='missions.employee')),
+                ('mission', models.ForeignKey(
+                    on_delete=django.db.models.deletion.CASCADE, to='missions.mission')),
             ],
         ),
         migrations.CreateModel(
             name='MissionReport',
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.BigAutoField(auto_created=True,
+                 primary_key=True, serialize=False, verbose_name='ID')),
                 ('title', models.CharField(max_length=1024)),
                 ('publish_date', models.DateTimeField(verbose_name='Date published')),
                 ('summary', models.CharField(max_length=4096)),
-                ('assigned_to', models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to='missions.employee')),
-                ('mission', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='missions.mission')),
+                ('assigned_to', models.ForeignKey(null=True,
+                 on_delete=django.db.models.deletion.SET_NULL, to='missions.employee')),
+                ('mission', models.ForeignKey(
+                    on_delete=django.db.models.deletion.CASCADE, to='missions.mission')),
             ],
         ),
     ]
