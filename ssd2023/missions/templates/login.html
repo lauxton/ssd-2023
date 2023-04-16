@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block styles %}
+  <style>
+    body {
+      display: -ms-flexbox;
+      display: -webkit-box;
+      display: flex;
+      -ms-flex-align: center;
+      -ms-flex-pack: center;
+      -webkit-box-align: center;
+      align-items: center;
+      -webkit-box-pack: center;
+      justify-content: center;
+      padding-top: 40px;
+      padding-bottom: 40px;
+    }
+  </style>
+{% endblock %}
+
+{% block main %}
+  <form class="form-login" action="/login" method="POST">
+    {% csrf_token %}
+
+    <img class="mb-4" src="/static/nasa-logo.png" alt="" width="256" height="128" />
+
+    <h1 class="h3 mb-3 font-weight-normal">ISS and NASA</h1>
+    <p class="lead">Log in</p>
+
+    {% for field in form %}
+      <label for="{{ field.auto_id }}" class="sr-only">{{ field.name }}</label>
+      {% if field.name == 'password' %}
+        <input type="password" id="{{ field.auto_id }}" name="{{ field.html_name }}" class="form-control" placeholder="{{ field.label }}" required autofocus />
+      {% else %}
+        <input type="text" id="{{ field.auto_id }}" name="{{ field.html_name }}" class="form-control" placeholder="{{ field.label }}" required autofocus />
+      {% endif %}
+    {% endfor %}
+
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Log in</button>
+  </form>
+{% endblock %}

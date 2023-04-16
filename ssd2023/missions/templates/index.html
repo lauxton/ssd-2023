@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block main %}
+  <div class="mt-4">
+    <img src="/static/nasa-logo.png" alt="" width="256" height="128" />
+    <h1>ISS and NASA</h1>
+    <p class="lead">This is a prototype for the implementation of the ISS and NASA portal.</p>
+  </div>
+
+  {% if missions %}
+    <h4>Mission List</h4>
+
+    <ul>
+      {% for mission in missions %}
+        <li>
+          <a href="/mission/{{ mission.pk }}">{{ mission.name }}</a>
+        </li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+
+  {% if mission_reports %}
+    <h4>Mission Report List</h4>
+
+    <ul>
+      {% for mission_report in mission_reports %}
+        <li>
+          <a href="/mission-report/{{ mission_report.pk }}">{{ mission_report.title }}</a>
+        </li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+
+  {% if can_add_mission %}
+    <a href="/mission/create" class="btn btn-primary">Create Mission</a>
+  {% endif %}
+
+  <a href="/logout" class="btn btn-primary">Logout</a>
+{% endblock %}
