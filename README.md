@@ -145,6 +145,7 @@ The following features have built-in Django support:
 * Administration portal with user authentication and database models
 * SHA-256 encryption algorithm, salt and hashing of passwords
 * User session management via cookies 
+* Database injection attack filter
 
 The following commands were added to `settings.py` to achieve input santisation measures, session management, and data encryption:
 ```
