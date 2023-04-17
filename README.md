@@ -281,12 +281,12 @@ Likewise, NASA employee access to report content will be added as needed in the 
 * Django (2023) _Writing Your First Django App, Part 1_. Available at: https://docs.djangoproject.com/en/4.2/intro/tutorial01/
 * Django (2023) _Working with Forms_ https://docs.djangoproject.com/en/4.1/topics/forms/
 * Vincent, W. (2022) _Django Login and Logout Tutorial_ | LearnDjango. Available at: https://learndjango.com/tutorials/django-login-and-logout-tutorial
-Django (2023) _Security in Django_ https://docs.djangoproject.com/en/4.2/topics/security/
+* Django (2023) _Security in Django_ https://docs.djangoproject.com/en/4.2/topics/security/
 * LastPass (2023) _Password Management from Anywhere_. Available at: https://www.lastpass.com/
-Kiprin, B. (2021) _Web Server Information Leakage Security Assessment_ | CrashTest Security. Available at: https://crashtest-security.com/server-version-fingerprinting/
+* Kiprin, B. (2021) _Web Server Information Leakage Security Assessment_ | CrashTest Security. Available at: https://crashtest-security.com/server-version-fingerprinting/
 * Pypi (2023) _pylint 2.17.2_. Available at; https://pypi.org/project/pylint/
 * Pypi (2022) _django-cryptography 1.1_. Available at: https://pypi.org/project/django-cryptography/
 * Mozilla (2016) _Installing django-csp_. Available at: https://django-csp.readthedocs.io/en/latest/installation.html
-Mozilla (2023) _Content Security Policy_. Available at: https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP
-Webhint (n.d.) _Use X-Content-Type-Options Header_ Available at: https://webhint.io/docs/user-guide/hints/hint-x-content-type-options/
+* Mozilla (2023) _Content Security Policy_. Available at: https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP
+* Webhint (n.d.) _Use X-Content-Type-Options Header_ Available at: https://webhint.io/docs/user-guide/hints/hint-x-content-type-options/
 * ZAP (2023) _Active Scan_. Available at: https://www.zaproxy.org/docs/desktop/start/features/ascan/
