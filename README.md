@@ -224,7 +224,7 @@ The cross-domain URL has been neutralized using `integrity` and `crossorigin` mo
 
 ### Access Controls
 
-Access controls were handled by the admin (superuser) on the admin backend (see `27.0.0.1/admin`) and comprised of:
+Access controls were handled by the admin (superuser) on the admin backend (see `http://localhost:8000/admin`) and comprised of:
 
 Admin (superuser) permissions:
 
