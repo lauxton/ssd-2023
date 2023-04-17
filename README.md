@@ -115,3 +115,5 @@ Destroying test database for alias 'default'...
 * https://docs.djangoproject.com/en/4.1/topics/forms/
 * https://learndjango.com/tutorials/django-login-and-logout-tutorial
 * LastPass (2023) https://www.lastpass.com/
+* https://pypi.org/project/pylint/
+* https://pypi.org/project/django-cryptography/
