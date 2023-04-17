@@ -226,7 +226,7 @@ The cross-domain URL has been neutralized using `integrity` and `crossorigin` mo
 
 Access controls were handled by the admin (superuser) on the admin backend (see `http://localhost:8000/admin`) and comprised of:
 
-Admin (superuser) permissions:
+Admin (superuser) permissions include but are not limited to:
 
 * add and delete users
 * edit users' statuses
@@ -247,7 +247,7 @@ Mission Reports
 
 Permissions to view and generate reports can be demonstrated using the instructions in the _User Interface_ section.
 
-## Difference Between the Prototype and Report Proposal
+## Differences Between the Prototype and Report Proposal (241 words)
 Firstly, the use of Django in the prototype was not apart of the original proposal. It was later added to provide the most realistic prototype possible, and to allow for more enhanced vulnerability testing via Zaproxy which requires the use of a `host` .
 
 Boundary validation was thus substituted for django in-built input validation modules, which can be reviewed in the _Security Features_ section above.
