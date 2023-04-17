@@ -32,6 +32,11 @@ Bash
 source foo_env/bin/activate
 ```
 [Tip] Make sure to have Django downloaded onto your virtual environment, and to have downloaded django-cryptography and django-csp before trying to migrate the server.
+Powershell
+```Powershell
+
+```
+Bash
 ```bash
 pip3 install django
 pip3 install django-cryptography
@@ -70,9 +75,11 @@ python manage.py migrate
 ### Database
 To log in to the backend database, a super user needs to be created:
 
+Powershell
 ```powershell
 python manage.py createsuperuser
 ```
+Bash
 ```bash
 python3 manage.py createsuperuser
 ```
