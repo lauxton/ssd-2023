@@ -1,3 +1,4 @@
+"""URL paths for the Missions App"""
 from django.urls import path
 
 from . import views

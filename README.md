@@ -20,6 +20,8 @@ Bash
 sudo apt update
 sudo apt install python3.10-venv
 python3 -m venv foo_env
+source foo_env/bin/activate
+pip3 install -r requirements.txt
 ```
 [Tip] Always make sure to activate the virtual environment before running any other commands:
 
@@ -31,11 +33,8 @@ Bash
 ```bash
 source foo_env/bin/activate
 ```
-[Tip] Make sure to have Django downloaded onto your virtual environment, and to have downloaded django-cryptography and django-csp before trying to migrate the server.
-Powershell
-```Powershell
+[Tip] If running Linux, make sure to have Django downloaded onto your virtual environment, and to have downloaded django-cryptography and django-csp before trying to migrate the server (Matthes, 2021; crypto, xxxx; csp, xxxx).
 
-```
 Bash
 ```bash
 pip3 install django

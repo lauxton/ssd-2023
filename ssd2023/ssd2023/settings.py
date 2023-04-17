@@ -171,7 +171,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-if DEBUG == True:
+if DEBUG is True:
     AUTH_PASSWORD_VALIDATORS = []
 
 
