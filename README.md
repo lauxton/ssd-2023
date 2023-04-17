@@ -35,7 +35,14 @@ Bash
 ```bash
 source foo_env/bin/activate
 ```
-[Tip] If running Linux, make sure to have Django downloaded onto your virtual environment, and to have downloaded django-cryptography and django-csp before trying to migrate the server (Matthes, 2021; PyPi, 2022; Mozilla, 2016).
+[Tip] If running Linux, make sure to have Django downloaded onto your virtual environment, and to have downloaded django-cryptography and django-csp before trying to migrate the server (Matthes, 2021; PyPi, 2022; Mozilla, 2016). Alternatively, the required packages can be installed individually like this:
+
+PowerShell
+```powershell
+pip install django
+pip install django-cryptography
+pip install django-csp
+```
 
 Bash
 ```bash
