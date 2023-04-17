@@ -1,3 +1,4 @@
+'''Functions for viewing objects when rendered'''
 import logging
 
 from datetime import datetime
@@ -16,6 +17,7 @@ logger = logging.getLogger("ssd2023")
 
 @login_required(login_url='/login')
 def index(request):
+    '''view of index based on access control'''
     content = {
         'can_add_mission': request.user.has_perm("missions.add_mission"),
     }
@@ -47,6 +49,7 @@ def index(request):
 
 
 def login_endpoint(request):
+    '''login request'''
     if request.method == 'POST':
         username = request.POST.get('username', '')
         password = request.POST.get('password', '')
@@ -67,6 +70,7 @@ def login_endpoint(request):
 
 @login_required(login_url='/login')
 def logout_endpoint(request):
+    '''logout request'''
     logout(request)
 
     return render(request, 'logout.html')
@@ -75,6 +79,7 @@ def logout_endpoint(request):
 @login_required(login_url='/login')
 @permission_required('missions.view_mission', raise_exception=True)
 def mission_details(request, mission_id):
+    '''mission objects request'''
     mission = Mission.objects.get(pk=mission_id)
     mission_reports = mission.missionreport_set.all()
     generate_report_form = GenerateReportForm()
@@ -96,6 +101,7 @@ def mission_details(request, mission_id):
 @login_required(login_url='/login')
 @permission_required('missions.add_mission', raise_exception=True)
 def mission_create(request):
+    '''create mission request'''
     if request.method == 'POST':
         mission = Mission()
         form = MissionForm(request.POST, instance=mission)
@@ -114,6 +120,7 @@ def mission_create(request):
 @login_required(login_url='/login')
 @permission_required('missions.change_mission', raise_exception=True)
 def mission_update(request, mission_id):
+    '''update mission request'''
     if request.method == 'POST':
         mission = Mission.objects.get(pk=mission_id)
         form = MissionForm(request.POST, instance=mission)
@@ -132,6 +139,7 @@ def mission_update(request, mission_id):
 @login_required(login_url='/login')
 @permission_required('missions.delete_mission', raise_exception=True)
 def mission_delete(request, mission_id):
+    '''delete mission request'''
     mission = Mission.objects.get(pk=mission_id)
     mission.delete()
 
@@ -141,6 +149,7 @@ def mission_delete(request, mission_id):
 @login_required(login_url='/login')
 @permission_required('missions.add_missionreport', raise_exception=True)
 def mission_report_generate(request, mission_id):
+    '''generate report request'''
     if request.method != 'POST':
         return HttpResponseRedirect("/")
 
@@ -172,6 +181,7 @@ def mission_report_generate(request, mission_id):
 @login_required(login_url='/login')
 @permission_required('missions.view_missionreport', raise_exception=True)
 def mission_report_details(request, mission_report_id):
+    '''view mission request'''
     mission_report = MissionReport.objects.get(pk=mission_report_id)
 
     return render(request, 'mission-report.html', {'mission_report': mission_report})

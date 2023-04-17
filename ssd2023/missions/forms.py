@@ -1,3 +1,5 @@
+'''Module for creating news mission forms'''
+
 from django import forms
 from django.forms import Form, ModelForm, TextInput, DateTimeInput, Select
 
@@ -8,6 +10,7 @@ class MissionForm(ModelForm):
     """Form for creating a new mission."""
 
     class Meta:
+        '''Provideded form sections'''
         model = Mission
         fields = [
             'name',
@@ -23,8 +26,10 @@ class MissionForm(ModelForm):
             'description': TextInput(attrs={'class': 'form-control'}),
             'division': Select(attrs={'class': 'form-control'}),
             'supervisor': Select(attrs={'class': 'form-control'}),
-            'start_date': DateTimeInput(attrs={'class': 'form-control', 'placeholder': 'yyyy-MM-dd HH:MM:SS'}),
-            'end_date': DateTimeInput(attrs={'class': 'form-control', 'placeholder': 'yyyy-MM-dd HH:MM:SS'}),
+            'start_date': DateTimeInput(
+                attrs={'class': 'form-control', 'placeholder': 'yyyy-MM-dd HH:MM:SS'}),
+            'end_date': DateTimeInput(
+                attrs={'class': 'form-control', 'placeholder': 'yyyy-MM-dd HH:MM:SS'}),
             'security_clearance': Select(attrs={'class': 'form-control'}),
         }
         labels = {

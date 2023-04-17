@@ -1,3 +1,4 @@
+'''all URL paths for MISSION'''
 from django.urls import path
 
 from . import views
