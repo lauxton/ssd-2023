@@ -54,13 +54,13 @@ def login_endpoint(request):
         username = request.POST.get('username', '')
         password = request.POST.get('password', '')
 
-        logger.info(f"User {username} is attempting to log in")
+        logger.info("User %s is attempting to log in", username)
 
         user = authenticate(request, username=username, password=password)
 
         if user is not None:
             login(request, user)
-            logger.info(f"User {username} has logged in successfully")
+            logger.info("User %s has logged in successfully", username)
             return HttpResponseRedirect("/")
 
     form = AuthenticationForm()

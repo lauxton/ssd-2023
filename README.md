@@ -127,14 +127,34 @@ Manage mission and optional generate report
 ## Source code linter (Pylint)
 The `pylint` linter is used to analyse the source code.
 
-Output result of the `ssd2023` module:
+Output result of the `ssd2023` module via running command `pylint ssd2023`:
 ```powershell
 -------------------------------------------------------------------
 Your code has been rated at 10.00/10 (previous run: 9.81/10, +0.19)
 ```
 
-Output result of the `missions` module:
+Output result of the `missions` module via running command `pylint --load-plugins pylint_django missions`:
 ```powershell
+************* Module missions
+missions\__init__.py:1:0: E5110: Django was not configured. For more information run pylint --load-plugins=pylint_django --help-msg=django-not-configured (django-not-configured)
+************* Module missions.admin
+missions\admin.py:5:0: E5142: User model imported from django.contrib.auth.models (imported-auth-user)
+************* Module missions.models
+missions\models.py:4:0: E5142: User model imported from django.contrib.auth.models (imported-auth-user)
+************* Module missions.tests
+missions\tests.py:3:0: E5142: User model imported from django.contrib.auth.models (imported-auth-user)
+************* Module missions.views
+missions\views.py:57:8: W1203: Use lazy % formatting in logging functions (logging-fstring-interpolation)
+missions\views.py:63:12: W1203: Use lazy % formatting in logging functions (logging-fstring-interpolation)
+************* Module missions.migrations.0001_initial
+missions\migrations\0001_initial.py:52:0: C0301: Line too long (109/100) (line-too-long)
+missions\migrations\0001_initial.py:58:0: C0301: Line too long (128/100) (line-too-long)
+missions\migrations\0001_initial.py:1:0: C0114: Missing module docstring (missing-module-docstring)
+missions\migrations\0001_initial.py:1:0: C0103: Module name "0001_initial" doesn't conform to snake_case naming style (invalid-name)
+missions\migrations\0001_initial.py:9:0: C0115: Missing class docstring (missing-class-docstring)
+
+------------------------------------------------------------------
+Your code has been rated at 9.00/10 (previous run: 3.37/10, +5.63)
 ```
 
 ## Security Features
