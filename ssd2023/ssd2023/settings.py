@@ -77,24 +77,26 @@ WSGI_APPLICATION = 'ssd2023.wsgi.application'
 
 # Content Security Policy
 CSP_DEFAULT_SRC = ("'none'",)
-CSP_STYLE_SRC = ("'self'",)
-CSP_SCRIPT_SRC = ("'self'",)
-CSP_IMG_SRC = ("'self'")
+CSP_STYLE_SRC = (
+    "'self'", 'https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css',)
+CSP_FONT_SRC = ('data:',)
+CSP_SCRIPT_SRC = ("'self'", 'https://code.jquery.com/jquery-3.6.4.min.js',)
+CSP_IMG_SRC = ("'self'",)
 CSP_FORM_ACTION = ("'self'",)
-CSP_FRAME_ANCESTORS = ("'none'")
+CSP_FRAME_ANCESTORS = ("'none'",)
 
 # Additional security from
-#https://stackoverflow.com/questions/26995114/how-to-add-x-xss-protection-header-in-django
+# https://stackoverflow.com/questions/26995114/how-to-add-x-xss-protection-header-in-django
 
 # XSS protection
 SECURE_BROWSER_XSS_FILTER = True
 
 # X-Frame-Options
 X_FRAME_OPTIONS = 'DENY'
-#X-Content-Type-Options
+# X-Content-Type-Options
 SECURE_CONTENT_TYPE_NOSNIFF = True
 
-# redirects HTTP requests to HTTPS. 
+# Redirects HTTP requests to HTTPS.
 # Set to True once SSL handshake is set on server
 SECURE_SSL_REDIRECT = False
 
