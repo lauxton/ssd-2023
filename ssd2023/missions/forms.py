@@ -23,8 +23,8 @@ class MissionForm(ModelForm):
             'description': TextInput(attrs={'class': 'form-control'}),
             'division': Select(attrs={'class': 'form-control'}),
             'supervisor': Select(attrs={'class': 'form-control'}),
-            'start_date': DateTimeInput(attrs={'class': 'form-control'}),
-            'end_date': DateTimeInput(attrs={'class': 'form-control'}),
+            'start_date': DateTimeInput(attrs={'class': 'form-control', 'placeholder': 'yyyy-MM-dd HH:MM:SS'}),
+            'end_date': DateTimeInput(attrs={'class': 'form-control', 'placeholder': 'yyyy-MM-dd HH:MM:SS'}),
             'security_clearance': Select(attrs={'class': 'form-control'}),
         }
         labels = {

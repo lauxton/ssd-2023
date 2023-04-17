@@ -7,7 +7,6 @@ from .models import *
 admin.site.register(Division)
 admin.site.register(Mission)
 admin.site.register(MissionReport)
-admin.site.register(Project)
 
 
 class EmployeeInline(admin.StackedInline):

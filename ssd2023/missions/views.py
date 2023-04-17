@@ -3,6 +3,7 @@ import logging
 from datetime import datetime
 
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.forms import AuthenticationForm
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
@@ -13,21 +14,34 @@ from .forms import MissionForm, GenerateReportForm
 logger = logging.getLogger("ssd2023")
 
 
+@login_required(login_url='/login')
 def index(request):
-    if not request.user.is_authenticated:
-        return HttpResponseRedirect("/login")
-
     content = {
         'can_add_mission': request.user.has_perm("missions.add_mission"),
     }
 
-    if request.user.is_superuser or request.user.groups.filter(name='ISS_Admin_User').exists():
-        missions = Mission.objects.all()
-        content['missions'] = missions
+    # Get the employee object for the current user
+    # For the superuser, this will be None
+    employee = Employee.objects.filter(user=request.user).first()
 
-    if request.user.is_superuser or request.user.groups.filter(name='NASA_Admin_User').exists():
-        mission_reports = MissionReport.objects.all()
-        content['mission_reports'] = mission_reports
+    if employee is not None:
+        if request.user.groups.filter(name='NASA_Admin_User').exists():
+            mission_reports = MissionReport.objects.filter(
+                assigned_to=employee)
+
+            content['mission_reports'] = mission_reports
+
+        if request.user.groups.filter(name='ISS_Admin_User').exists():
+            missions = Mission.objects.filter(supervisor=employee)
+            mission_reports_from_missions = MissionReport.objects.filter(
+                mission__in=missions)
+
+            content['missions'] = missions
+            content['mission_reports'] = mission_reports_from_missions
+
+    if request.user.is_superuser:
+        content['missions'] = Mission.objects.all()
+        content['mission_reports'] = MissionReport.objects.all()
 
     return render(request, 'index.html', content)
 
@@ -43,6 +57,7 @@ def login_endpoint(request):
 
         if user is not None:
             login(request, user)
+            logger.info(f"User {username} has logged in successfully")
             return HttpResponseRedirect("/")
 
     form = AuthenticationForm()
@@ -50,12 +65,15 @@ def login_endpoint(request):
     return render(request, 'login.html', {'form': form})
 
 
+@login_required(login_url='/login')
 def logout_endpoint(request):
     logout(request)
 
     return render(request, 'logout.html')
 
 
+@login_required(login_url='/login')
+@permission_required('missions.view_mission', raise_exception=True)
 def mission_details(request, mission_id):
     mission = Mission.objects.get(pk=mission_id)
     mission_reports = mission.missionreport_set.all()
@@ -75,6 +93,8 @@ def mission_details(request, mission_id):
     })
 
 
+@login_required(login_url='/login')
+@permission_required('missions.add_mission', raise_exception=True)
 def mission_create(request):
     if request.method == 'POST':
         mission = Mission()
@@ -91,6 +111,8 @@ def mission_create(request):
     return render(request, 'mission-create.html', {'mission': mission, 'form': form})
 
 
+@login_required(login_url='/login')
+@permission_required('missions.change_mission', raise_exception=True)
 def mission_update(request, mission_id):
     if request.method == 'POST':
         mission = Mission.objects.get(pk=mission_id)
@@ -107,13 +129,17 @@ def mission_update(request, mission_id):
     return render(request, 'mission-update.html', {'mission': mission, 'form': form})
 
 
-def mission_delete(mission_id):
+@login_required(login_url='/login')
+@permission_required('missions.delete_mission', raise_exception=True)
+def mission_delete(request, mission_id):
     mission = Mission.objects.get(pk=mission_id)
     mission.delete()
 
     return HttpResponseRedirect("/")
 
 
+@login_required(login_url='/login')
+@permission_required('missions.add_missionreport', raise_exception=True)
 def mission_report_generate(request, mission_id):
     if request.method != 'POST':
         return HttpResponseRedirect("/")
@@ -143,6 +169,8 @@ def mission_report_generate(request, mission_id):
     return HttpResponseRedirect("/mission-report/" + str(mission_report.pk))
 
 
+@login_required(login_url='/login')
+@permission_required('missions.view_missionreport', raise_exception=True)
 def mission_report_details(request, mission_report_id):
     mission_report = MissionReport.objects.get(pk=mission_report_id)
 
