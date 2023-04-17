@@ -164,11 +164,11 @@ Destroying test database for alias 'default'...
 ## Security Features
 This application was designed with security features (django, 2023) in mind. 
 
-The following features come built-in with Django:
+The following features have built-in Django support:
 
-* SHA-256 encryption for passwords during login
-* Salt and hashing for user authentication on login
-* Session cookies 
+* Administration portal with user authentication and database models
+* SHA-256 encryption algorithm, salt and hashing of passwords
+* User session management via cookies 
 
 The following commands were added to `settings.py` to achieve input santisation measures, session management, and data encryption:
 ```
