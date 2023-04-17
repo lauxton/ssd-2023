@@ -1,4 +1,4 @@
-'''Module for creating news mission forms'''
+"""Module for custom forms"""
 
 from django import forms
 from django.forms import Form, ModelForm, TextInput, DateTimeInput, Select
@@ -7,10 +7,10 @@ from .models import Mission, Employee
 
 
 class MissionForm(ModelForm):
-    """Form for creating a new mission."""
+    """Form for creating a new mission"""
 
     class Meta:
-        '''Provideded form sections'''
+        """Form model, display fields, widgets, and labels"""
         model = Mission
         fields = [
             'name',

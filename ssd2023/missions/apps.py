@@ -1,8 +1,8 @@
-'''Configure Missions Model'''
+"""Module for app configurations """
 from django.apps import AppConfig
 
 
 class MissionsConfig(AppConfig):
-    '''Configure Missions'''
+    """Configure the Missions App"""
     default_auto_field = 'django.db.models.BigAutoField'
     name = 'missions'

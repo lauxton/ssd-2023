@@ -1,4 +1,4 @@
-'''Set admin privileges for admin page'''
+"""Set admin privileges for admin page"""
 
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
@@ -13,14 +13,14 @@ admin.site.register(MissionReport)
 
 
 class EmployeeInline(admin.StackedInline):
-    '''Employee privileges'''
+    """Employee privileges"""
     model = Employee
     can_delete = False
     verbose_name_plural = 'employee'
 
 
 class UserAdmin(BaseUserAdmin):
-    '''admin privileges'''
+    """Admin privileges"""
     inlines = (EmployeeInline,)
 
 
