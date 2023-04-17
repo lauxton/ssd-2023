@@ -43,13 +43,14 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'csp.middleware.CSPMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
 ]
 
 ROOT_URLCONF = 'ssd2023.urls'
@@ -71,6 +72,47 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'ssd2023.wsgi.application'
+
+# Security Features
+
+# Content Security Policy
+CSP_DEFAULT_SRC = ("'none'",)
+CSP_STYLE_SRC = ("'self'",)
+CSP_SCRIPT_SRC = ("'self'",)
+CSP_IMG_SRC = ("'self'")
+CSP_FORM_ACTION = ("'self'",)
+CSP_FRAME_ANCESTORS = ("'none'")
+
+# Additional security from
+#https://stackoverflow.com/questions/26995114/how-to-add-x-xss-protection-header-in-django
+
+# XSS protection
+SECURE_BROWSER_XSS_FILTER = True
+
+# X-Frame-Options
+X_FRAME_OPTIONS = 'DENY'
+#X-Content-Type-Options
+SECURE_CONTENT_TYPE_NOSNIFF = True
+
+# redirects HTTP requests to HTTPS. 
+# Set to True once SSL handshake is set on server
+SECURE_SSL_REDIRECT = False
+
+
+# Cookie Security
+CSRF_COOKIE_SECURE = True
+CSRF_USE_SESSIONS = True
+CSRF_COOKIE_HTTPONLY = True
+LANGUAGE_COOKIE_HTTPONLY = True
+SESSION_COOKIE_HTTPONLY = True
+SESSION_COOKIE_SECURE = True
+SESSION_COOKIE_SAMESITE = 'Strict'
+
+# HTTP Strict Transport Security
+# Set to True once all certificates are set
+SECURE_HSTS_INCLUDE_SUBDOMAINS = False
+# Set to needed number of seconds once certificates are set
+SECURE_HSTS_SECONDS = 0
 
 # Logging
 
@@ -146,7 +188,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
-
+STATIC_ROOT = "/ssd-2023-main-/ssd2023/missions/static"
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
