@@ -29,19 +29,65 @@ python manage.py migrate
 python manage.py runserver
 ```
 
-To log in to the backend database via `http://localhost:8000/admin`, a super user needs to be created:
-
-```powershell
-python manage.py createsuperuser
-```
-
-## [Dev] Database migrations
+### [Dev] Database migrations
 
 Every time there are changes to the models that need to be propagated into the database, run the following commands:
 
 ```powershell
 python manage.py makemigrations missions
 python manage.py migrate
+```
+
+### Database
+To log in to the backend database, a super user needs to be created:
+
+```powershell
+python manage.py createsuperuser
+```
+
+Backend database (accessible via `http://localhost:8000/admin`)
+
+![Django admin log in page](./screenshots/django-admin.png)
+
+
+## User credentials
+Although it is more secure to share credentials via a password manager such as LastPass (2023), for the purpose of testing this prototype, two sample users' login credentials has been included in the table below. Their (and other users') details can be modified (e.g. resetting passwords) in the backend database when logged in as the superuser, which was created in an earlier step. 
+
+|    Username   |    Password   |  User (Employee) Type  |
+|---------------|:-------------:|:----------------------:|
+|  justin.thyme |    password   |       ISS Admin        |
+|   sam.widge   |    password   |       NASA Admin       |
+
+
+## User Interface
+Navigate to `http://localhost:8000/` on a browser (e.g. Edge, Chrome). Below are screenshots of the ISS and NASA prototype website user interface. The following is an example for the ISS Admin user Justin Thyme (username: justin.thyme).
+
+Log in page 
+![Log in page](./screenshots/login.png)
+
+Logging in with username justin.thyme
+![Login with username justin.thyme](./screenshots/login-with-justin.png)
+
+Home page view as an authenticated user (Justin Thyme) 
+![Home page after logging in as user Justin Thyme](./screenshots/justin-user-view.png)
+
+Create mission
+![Create mission page as an ISS Admin](./screenshots/create-mission.png)
+
+Manage mission and optional generate report
+![Manage mission and optional generate report page](./screenshots/justin-user-manage-mission-optional-generate-report.png)
+
+## Source code linter (Pylint)
+The `pylint` linter is used to analyse the source code.
+
+Output result of the `ssd2023` module:
+```powershell
+-------------------------------------------------------------------
+Your code has been rated at 10.00/10 (previous run: 9.81/10, +0.19)
+```
+
+Output result of the `missions` module:
+```powershell
 ```
 
 ## Testing
@@ -51,7 +97,21 @@ To run the unit and integration tests:
 python manage.py test
 ```
 
+Output of the tests:
+```powershell
+Found 13 test(s).
+Creating test database for alias 'default'...
+System check identified no issues (0 silenced).
+.............
+----------------------------------------------------------------------
+Ran 13 tests in 17.343s
+
+OK
+Destroying test database for alias 'default'...
+```
+
 # References
 * https://docs.djangoproject.com/en/4.2/intro/tutorial01/
 * https://docs.djangoproject.com/en/4.1/topics/forms/
 * https://learndjango.com/tutorials/django-login-and-logout-tutorial
+* LastPass (2023) https://www.lastpass.com/
