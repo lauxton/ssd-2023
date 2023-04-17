@@ -125,15 +125,15 @@ Manage mission and optional generate report
 ![Manage mission and optional generate report page](./screenshots/justin-user-manage-mission-optional-generate-report.png)
 
 ## Source code linter (Pylint)
-The `pylint` linter is used to analyse the source code.
+The `pylint` linter is used to analyse the source code. This was installed with `requirements.txt`.
 
-Output result of the `ssd2023` module:
+Output result of the `ssd2023` module by running the command `pylint ssd2023`:
 ```powershell
 -------------------------------------------------------------------
 Your code has been rated at 10.00/10 (previous run: 9.81/10, +0.19)
 ```
 
-Output result of the `missions` module:
+Output result of the `missions` module by running the command `pylint missions`:
 ```powershell
 ```
 

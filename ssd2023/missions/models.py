@@ -1,3 +1,4 @@
+"""Database and Class Models for the App"""
 from django.db import models
 from django.core.exceptions import ValidationError
 from django.contrib.auth.models import User
@@ -13,7 +14,7 @@ class Division(models.Model):
     name = models.CharField(max_length=DEFAULT_NAME_LENGTH)
 
     def __str__(self):
-        return self.name
+        return str(self.name)
 
 
 class SecurityClearance(models.IntegerChoices):
@@ -58,7 +59,7 @@ class Mission(models.Model):
     security_clearance = models.IntegerField(choices=SecurityClearance.choices)
 
     def __str__(self):
-        return self.name
+        return str(self.name)
 
     def clean(self):
         if self.start_date and self.end_date:
@@ -76,4 +77,4 @@ class MissionReport(models.Model):
     summary = models.CharField(max_length=DEFAULT_DESCRIPTION_LENGTH)
 
     def __str__(self):
-        return self.title
+        return str(self.title)
