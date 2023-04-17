@@ -137,30 +137,6 @@ Output result of the `missions` module:
 ```powershell
 ```
 
-## Testing
-To run the unit and integration tests:
-
-PowerShell
-```powershell
-python manage.py test
-```
-Bash
-```bash
-python3 manage.py test
-```
-
-Output of the tests:
-```powershell
-Found 13 test(s).
-Creating test database for alias 'default'...
-System check identified no issues (0 silenced).
-.............
-----------------------------------------------------------------------
-Ran 13 tests in 17.343s
-
-OK
-Destroying test database for alias 'default'...
-```
 ## Security Features
 This application was designed with security features (django, 2023) in mind. 
 
@@ -283,6 +259,31 @@ This prototype is meant to demonstrate the ISS Admin's ability to generate and s
 As satellite data must be input by the ISS engineer, access to this data will be configured on the production server in the production version of the application.
 
 Likewise, NASA employee access to report content will be added as needed in the production version of the application.
+
+## Testing
+To run the unit and integration tests:
+
+PowerShell
+```powershell
+python manage.py test
+```
+Bash
+```bash
+python3 manage.py test
+```
+
+Output of the tests:
+```powershell
+Found 13 test(s).
+Creating test database for alias 'default'...
+System check identified no issues (0 silenced).
+.............
+----------------------------------------------------------------------
+Ran 13 tests in 17.343s
+
+OK
+Destroying test database for alias 'default'...
+```
 
 # References
 * Django (2023) _Writing Your First Django App, Part 1_. Available at: https://docs.djangoproject.com/en/4.2/intro/tutorial01/
