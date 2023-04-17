@@ -7,42 +7,81 @@ Note: [Dev] indicates that it is relevant for development in relation to the sou
 
 ## Initial setup
 
-The initial setup includes creating a virtual environment which in this case is calld `.venv`, then activating the virtual environment, then within the virtual environment, installing the required packages from the `requirements.txt` file. This is performed by running the following commands in a terminal such as Windows PowerShell or bash:
+The initial setup includes creating a virtual environment which in this case is calld `.venv`, then activating the virtual environment, then within the virtual environment, installing the required packages from the `requirements.txt` file. This is performed by running the following commands in a terminal:
 
+ PowerShell
 ```powershell
 python -m venv ./.venv
 ./.venv/scripts/Activate.ps1
 pip install -r requirements.txt
 ```
-
+Bash
+```bash
+sudo apt update
+sudo apt install python3.10-venv
+python3 -m venv foo_env
+```
 [Tip] Always make sure to activate the virtual environment before running any other commands:
 
+Powershell
 ```powershell
 ./.venv/scripts/Activate.ps1
+```
+Bash
+```bash
+source foo_env/bin/activate
+```
+[Tip] Make sure to have Django downloaded onto your virtual environment, and to have downloaded django-cryptography and django-csp before trying to migrate the server.
+Powershell
+```Powershell
+
+```
+Bash
+```bash
+pip3 install django
+pip3 install django-cryptography
+pip3 install django-csp
 ```
 
 Run initial migrations and start server:
 
+Powershell
 ```powershell
 cd ssd2023
 python manage.py migrate
 python manage.py runserver
+```
+Bash
+```bash
+cd ssd2023
+python3 manage.py migrate
+python3 manage.py runserver
 ```
 
 ### [Dev] Database migrations
 
 Every time there are changes to the models that need to be propagated into the database, run the following commands:
 
+Powershell
 ```powershell
 python manage.py makemigrations missions
 python manage.py migrate
 ```
-
+Bash
+```bash
+python3 manage.py makemigrations missions
+python manage.py migrate
+```
 ### Database
 To log in to the backend database, a super user needs to be created:
 
+Powershell
 ```powershell
 python manage.py createsuperuser
+```
+Bash
+```bash
+python3 manage.py createsuperuser
 ```
 
 Backend database (accessible via `http://localhost:8000/admin`)
@@ -96,6 +135,9 @@ To run the unit and integration tests:
 ```powershell
 python manage.py test
 ```
+```bash
+python3 manage.py test
+'''
 
 Output of the tests:
 ```powershell
