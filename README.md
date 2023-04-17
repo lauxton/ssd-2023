@@ -3,7 +3,7 @@ Prototype for The International Space Station (ISS) and NASA by The B Team (Grou
 
 The prototype is demo application that allows admins on the ISS to generate and assign reports to admins at NASA. NASA admins are then able to read these reports.
 
-Note: [Dev] indicates that it is relevant for development in relation to the source code. [Tip] is a reminder or helpful hint. If a few different `python` versions are installed, the `python` commands may need to be `python3` or another equivalent instead.
+Note: [Dev] indicates that it is relevant for development in relation to the source code. [Tip] is a reminder or helpful hint. If a few different `python` versions are installed, the `python` commands may need to be `python3` or another equivalent instead. Similarly, if a few different `pip` versions exist, `pip3` may need to be used in place of `pip`.
 
 <b>Prerequisites:</b> Python 3.11+
 
@@ -27,7 +27,7 @@ pip3 install -r requirements.txt
 ```
 [Tip] Always make sure to activate the virtual environment before running any other commands:
 
-Powershell
+PowerShell
 ```powershell
 ./.venv/scripts/Activate.ps1
 ```
@@ -46,7 +46,7 @@ pip3 install django-csp
 
 Run initial migrations and start server:
 
-Powershell
+PowerShell
 ```powershell
 cd ssd2023
 python manage.py migrate
@@ -63,7 +63,7 @@ python3 manage.py runserver
 
 Every time there are changes to the models that need to be propagated into the database, run the following commands:
 
-Powershell
+PowerShell
 ```powershell
 python manage.py makemigrations missions
 python manage.py migrate
@@ -76,7 +76,7 @@ python manage.py migrate
 ### Database
 To log in to the backend database, a super user needs to be created:
 
-Powershell
+PowerShell
 ```powershell
 python manage.py createsuperuser
 ```
@@ -133,12 +133,14 @@ Output result of the `missions` module:
 ## Testing
 To run the unit and integration tests:
 
+PowerShell
 ```powershell
 python manage.py test
 ```
+Bash
 ```bash
 python3 manage.py test
-'''
+```
 
 Output of the tests:
 ```powershell
@@ -224,7 +226,7 @@ Mission Reports
 
 Permissions to view and generate reports can be demonstrated using the instructions in the `User Interface` section.
 
-## Difference Between the Prototype and Report Proposal
+## Difference Between the Prototype and Report Proposal (~ words)
 Firstly, the use of Django in the prototype was not apart of the original proposal. It was later added to provide the most realistic prototype possible, and to allow for more enhanced vulnerability testing via Zaproxy which requires the use of a `host` 
 
 Boundary validation was thus substituted for django in-built input validation modules, which can be reviewed in the _Security Features_ section above.
