@@ -1,3 +1,4 @@
+'''Test Cases for function test'''
 from django.test import TestCase, Client
 from django.contrib.auth.models import User, Group, Permission
 
@@ -5,7 +6,9 @@ from .models import Mission, Employee, SecurityClearance
 
 
 class MissionTestCase(TestCase):
+    '''Tests objects in Mission'''
     def setUp(self):
+        '''sets up the test env'''
         self.client = Client()
 
         User.objects.create_superuser('admin', 'admin@test.com', 'password')
@@ -38,12 +41,14 @@ class MissionTestCase(TestCase):
         ella.save()
 
     def test_should_redirect_to_login_unless_logged_in(self):
+        '''tests login redirect'''
         response = self.client.get('/')
 
         self.assertEqual(response.status_code, 302)
         self.assertEqual(response.url, '/login?next=/')
 
     def test_should_display_index_when_logged_in(self):
+        '''tests index display'''
         self.client.login(username='admin', password='password')
 
         response = self.client.get('/')
@@ -52,6 +57,7 @@ class MissionTestCase(TestCase):
         self.assertTemplateUsed(response, 'index.html')
 
     def test_should_not_display_mission_details_when_logged_out(self):
+        '''tests logout info security'''
         supervisor = Employee.objects.create(
             user=User.objects.get(username='admin'),
             security_clearance=SecurityClearance.TOP_SECRET
@@ -70,6 +76,7 @@ class MissionTestCase(TestCase):
         self.assertEqual(response.url, f"/login?next=/mission/{mission.pk}")
 
     def test_should_display_mission_details_when_logged_in(self):
+        '''test info display on login'''
         supervisor = Employee.objects.create(
             user=User.objects.get(username='admin'),
             security_clearance=SecurityClearance.TOP_SECRET
@@ -90,12 +97,14 @@ class MissionTestCase(TestCase):
         self.assertTemplateUsed(response, 'mission.html')
 
     def test_should_not_allow_mission_creation_when_logged_out(self):
+        '''tests function security when logged out'''
         response = self.client.get('/mission/create')
 
         self.assertEqual(response.status_code, 302)
         self.assertEqual(response.url, '/login?next=/mission/create')
 
     def test_should_allow_mission_creation_when_logged_in(self):
+        '''tests function with login'''
         self.client.login(username='admin', password='password')
 
         response = self.client.get('/mission/create')
@@ -104,6 +113,7 @@ class MissionTestCase(TestCase):
         self.assertTemplateUsed(response, 'mission-create.html')
 
     def test_should_not_allow_mission_update_when_logged_out(self):
+        '''tests function security when logged out'''
         supervisor = Employee.objects.create(
             user=User.objects.get(username='admin'),
             security_clearance=SecurityClearance.TOP_SECRET
@@ -122,6 +132,7 @@ class MissionTestCase(TestCase):
         self.assertEqual(response.url, f"/login?next=/mission/{mission.pk}/update")
 
     def test_should_allow_mission_update_when_logged_in(self):
+        '''tests function when logged in'''
         supervisor = Employee.objects.create(
             user=User.objects.get(username='admin'),
             security_clearance=SecurityClearance.TOP_SECRET
@@ -142,6 +153,7 @@ class MissionTestCase(TestCase):
         self.assertTemplateUsed(response, 'mission-update.html')
 
     def test_should_not_allow_mission_delete_when_logged_out(self):
+        '''tests function security when logged out'''
         supervisor = Employee.objects.create(
             user=User.objects.get(username='admin'),
             security_clearance=SecurityClearance.TOP_SECRET
@@ -160,6 +172,7 @@ class MissionTestCase(TestCase):
         self.assertEqual(response.url, f"/login?next=/mission/{mission.pk}/delete")
 
     def test_should_allow_mission_delete_when_logged_in(self):
+        '''tests function when logged in'''
         supervisor = Employee.objects.create(
             user=User.objects.get(username='admin'),
             security_clearance=SecurityClearance.TOP_SECRET
@@ -183,6 +196,7 @@ class MissionTestCase(TestCase):
         self.assertEqual(missions, 0)
 
     def test_should_not_allow_mission_creation_without_supervisor(self):
+        '''tests access controls'''
         self.client.login(username='admin', password='password')
 
         response = self.client.post('/mission/create', {
@@ -195,6 +209,7 @@ class MissionTestCase(TestCase):
         self.assertTemplateUsed(response, 'mission-create.html')
 
     def test_should_not_allow_mission_creation_when_user_is_not_iss_admin(self):
+        '''tests access controls'''
         supervisor = Employee.objects.create(
             user=User.objects.get(username='admin'),
             security_clearance=SecurityClearance.TOP_SECRET
@@ -212,6 +227,7 @@ class MissionTestCase(TestCase):
         self.assertEqual(response.status_code, 403)
 
     def test_should_allow_mission_creation_when_user_is_iss_admin(self):
+        '''tests access controls'''
         supervisor = Employee.objects.create(
             user=User.objects.get(username='juan.mortyme'),
             security_clearance=SecurityClearance.TOP_SECRET
