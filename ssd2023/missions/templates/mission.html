@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block main %}
+  <div class="mt-4">
+    <img src="/static/nasa-logo.png" alt="" width="256" height="128" />
+  </div>
+
+  <div>
+    <h1>Mission: {{ mission.name }}</h1>
+    <p class="lead">
+      <b>Description:</b> {{ mission.description }}
+    </p>
+    <p class="lead">
+      <b>Division:</b> {{ mission.division }}
+    </p>
+    <p class="lead">
+      <b>Supervisor:</b> {{ mission.supervisor }}
+    </p>
+    <p class="lead">
+      <b>Date of commencement:</b> {{ mission.start_date }}
+    </p>
+    <p class="lead">
+      <b>Date of completion:</b> {{ mission.end_date }}
+    </p>
+    <p class="lead">
+      <b>Security clearance required:</b> {{ mission.security_clearance }}
+    </p>
+  </div>
+
+  <hr />
+
+  <div class="mt-2">
+    <h2>Mission Reports</h2>
+    <ul>
+      {% for report in reports %}
+        <li>
+          <a href="/mission-report/{{ report.pk }}">{{ report.title }}</a>
+        </li>
+      {% endfor %}
+    </ul>
+
+    <form class="mt-2" action="/mission-report/generate/{{ mission.pk }}" method="POST">
+      <h3>Generate Mission Report</h3>
+      {% csrf_token %}
+      {{ generate_report_form }}
+      {% if can_add_report %}
+        <button class="btn btn-success mt-2" type="submit">Generate Report</button>
+      {% endif %}
+    </form>
+  </div>
+
+  <hr />
+
+  <div class="mt-2">
+    <a href="/" class="btn btn-secondary">Back</a>
+
+    {% if can_update %}
+      <a href="/mission/{{ mission.pk }}/update" class="btn btn-primary">Update Mission</a>
+    {% endif %}
+
+    {% if can_delete %}
+      <a href="/mission/{{ mission.pk }}/delete" class="btn btn-danger" id="delete-button">Delete Mission</a>
+    {% endif %}
+  </div>
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+      $('#delete-button').click(function (e) {
+        e.preventDefault()
+    
+        if (confirm('Are you sure you want to delete this mission (including reports)?')) {
+          window.location.href = $(this).attr('href')
+        }
+      })
+    })
+  </script>
+{% endblock %}
